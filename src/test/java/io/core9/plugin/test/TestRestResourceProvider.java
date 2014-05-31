@@ -27,16 +27,6 @@ public class TestRestResourceProvider {
 
 
 
-	@Test
-	public void loopPlugins() {
 
-		for (Plugin plugin : registry.getPlugins()) {
-			List<Class<?>> interfaces = ClassUtils.getAllInterfaces(plugin
-					.getClass());
-
-			
-			
-		}
-	}
 
 }

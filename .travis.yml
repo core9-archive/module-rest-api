@@ -1,0 +1,10 @@
+language: java
+env:
+  global:
+  - TERM=dumb
+  - secure: NRMBQUZgJoLTst3LMMvGQSbGkOMCnDFXMIC31qnyPjWoS3uZ5tRpLvRXIB6wjY23vd6fRFOZ5KBguDVdwxnn9mo4FxCF3lz5BLLmZVeyRaNM1SYJ/lqOJyx0KO0EuZIYtGAUODrt1g6YdRMeW0searnofTX/bw47Dg9ZFsoKSvE=
+  - secure: Q2jUnjY9xu2p3awoYA0nEukNKHKgaVTy3uKfnpIl0UMbJOTKzoxu+6qEHMNe6BaA7uhA1bYybaViS2HbXZHYhVaNoaJDDIflsY0ijvCRMfQMY1eu2/0yIm1l/bZpS5qEB/DG1mseuj0Rh+UpKvOnK/PViKgNM7vZLLb3DQ3ngZI=
+  - secure: MRjDMQpZvH8JZT72jWSN1wuApSBY+uiM4ibf7N1BrUSYGhNKYa4KU3jVdQG649gDJYmhGITIjj8hI9TuZyFqt5tkL7hay6/OYKIZs495OR2lsr3mKdXAIg/V0xdlBM9J372Eh8eAsVxKBMY+QPFaEXd+uc0m8NoeadGGTrP1XO8=
+  - secure: eYRIoPfUs5ErXExj9B6NnHMauoMC7ayGKwSoJnxjweR1AjMD2hkULWd/Cmyailm7LeUmniZwdnN2Sdvd0XGhil0KtHdw6UAdvkgkr13EfsRpAWy9zFobH/Iwh9P9ZKgyGZBVJ7vQ75YT1C7RKi3MR0bGWrHrZ2E9hFgCYcUsOe8=
+install:
+- ./gradlew clean test build publish publishBintray
