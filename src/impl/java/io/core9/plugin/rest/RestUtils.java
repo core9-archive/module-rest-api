@@ -18,7 +18,6 @@ import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
 import com.wordnik.swagger.model.ApiListing;
 
 import io.core9.plugin.petstore.api.PetResource;
-import io.core9.plugin.test.PojoMapper;
 
 public class RestUtils {
 	

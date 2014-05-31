@@ -1,4 +1,4 @@
-package io.core9.plugin.test;
+package io.core9.plugin.rest;
 
 import java.io.FileReader;
 import java.io.FileWriter;

@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 
 import io.core9.plugin.petstore.api.PetResource;
 import io.core9.plugin.petstore.api.exceptions.NotFoundException;
+import io.core9.plugin.rest.PojoMapper;
 
 import org.junit.Test;
 
