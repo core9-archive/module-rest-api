@@ -1,0 +1,206 @@
+[
+	{
+		"path":"\/pet\/{petId}\/owner",
+		"operations":[
+			{
+				"summary":"Gets the owner of a pet",
+				"notes":"",
+				"method":"GET",
+				"nickname":"getOwner",
+				"produces":[
+					"application\/json"
+				],
+				"authorizations":{
+					
+				},
+				"type":"Owner",
+				"parameters":[
+					{
+						"paramType":"path",
+						"allowMultiple":false,
+						"name":"petId",
+						"type":"string",
+						"required":true
+					}
+				]
+			}
+		]
+	},
+	{
+		"path":"\/pet\/{petId : [0-9]}",
+		"operations":[
+			{
+				"summary":"Find pet by ID",
+				"notes":"Returns a pet when ID < 10. ID > 10 or nonintegers will simulate API error conditions",
+				"method":"GET",
+				"nickname":"getPetById",
+				"authorizations":{
+					
+				},
+				"type":"Pet",
+				"parameters":[
+					{
+						"paramType":"path",
+						"allowMultiple":false,
+						"name":"petId",
+						"description":"ID of pet that needs to be fetched",
+						"maximum":"5.0",
+						"type":"string",
+						"minimum":"1.0",
+						"required":true
+					}
+				],
+				"responseMessages":[
+					{
+						"code":400,
+						"message":"Invalid ID supplied"
+					},
+					{
+						"code":404,
+						"message":"Pet not found"
+					}
+				]
+			}
+		]
+	},
+	{
+		"path":"\/pet",
+		"operations":[
+			{
+				"summary":"Update an existing pet",
+				"notes":"",
+				"method":"PUT",
+				"nickname":"updatePet",
+				"authorizations":{
+					
+				},
+				"type":"void",
+				"parameters":[
+					{
+						"paramType":"body",
+						"allowMultiple":false,
+						"name":"body",
+						"description":"Pet object that needs to be added to the store",
+						"type":"Pet",
+						"required":true
+					}
+				],
+				"responseMessages":[
+					{
+						"code":400,
+						"message":"Invalid ID supplied"
+					},
+					{
+						"code":404,
+						"message":"Pet not found"
+					},
+					{
+						"code":405,
+						"message":"Validation exception"
+					}
+				]
+			},
+			{
+				"summary":"Add a new pet to the store",
+				"notes":"",
+				"method":"POST",
+				"nickname":"addPet",
+				"authorizations":{
+					
+				},
+				"type":"void",
+				"parameters":[
+					{
+						"paramType":"body",
+						"allowMultiple":false,
+						"name":"body",
+						"description":"Pet object that needs to be added to the store",
+						"type":"Pet",
+						"required":true
+					}
+				],
+				"responseMessages":[
+					{
+						"code":405,
+						"message":"Invalid input"
+					}
+				]
+			}
+		]
+	},
+	{
+		"path":"\/pet\/findByStatus",
+		"operations":[
+			{
+				"summary":"Finds Pets by status",
+				"notes":"Multiple status values can be provided with comma seperated strings",
+				"method":"GET",
+				"nickname":"findPetsByStatus",
+				"authorizations":{
+					
+				},
+				"type":"array",
+				"items":{
+					"$ref":"Pet"
+				},
+				"parameters":[
+					{
+						"paramType":"query",
+						"allowMultiple":true,
+						"defaultValue":"available",
+						"name":"status",
+						"description":"Status values that need to be considered for filter",
+						"type":"string",
+						"required":true,
+						"enum":[
+							"available",
+							"pending",
+							"sold"
+						]
+					}
+				],
+				"responseMessages":[
+					{
+						"code":400,
+						"message":"Invalid status value"
+					}
+				]
+			}
+		]
+	},
+	{
+		"path":"\/pet\/findByTags",
+		"operations":[
+			{
+				"summary":"Finds Pets by tags",
+				"notes":"Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+				"method":"GET",
+				"deprecated":"true",
+				"nickname":"findPetsByTags",
+				"authorizations":{
+					
+				},
+				"type":"array",
+				"items":{
+					"$ref":"Pet"
+				},
+				"parameters":[
+					{
+						"paramType":"query",
+						"allowMultiple":true,
+						"name":"tags",
+						"description":"Tags to filter by",
+						"type":"string",
+						"required":true
+					}
+				],
+				"responseMessages":[
+					{
+						"code":400,
+						"message":"Invalid tag value"
+					}
+				]
+			}
+		]
+	}
+]

@@ -1,8 +1,5 @@
 package io.core9.plugin.test;
 
-import io.core9.plugin.petstore.api.PetResource;
-
-import org.junit.Test;
 
 import scala.Option;
 
@@ -10,11 +7,12 @@ import com.wordnik.swagger.config.SwaggerConfig;
 import com.wordnik.swagger.core.util.JsonSerializer;
 import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
 import com.wordnik.swagger.model.ApiListing;
+import com.wordnik.swagger.sample.resource.PetResource;
 
 public class TestBasicResource {
 
 	
-	@Test
+	//@Test
 	public void test(){
 	
 

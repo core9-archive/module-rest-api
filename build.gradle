@@ -5,47 +5,78 @@
 apply from: 'http://www.core9.io/buildfiles/gradle/source.gradle'
 apply from: 'http://www.core9.io/buildfiles/gradle/publish.gradle'
 
-buildscript {
-	apply from: 'http://www.core9.io/buildfiles/gradle/publish-build.gradle'
-}
+buildscript { apply from: 'http://www.core9.io/buildfiles/gradle/publish-build.gradle' }
 
 /**
  * @TODO Somehow cannot be moved to publish.gradle
  */
 task publishBintray (type: org._10ne.gradle.rest.RestTask, dependsOn: bintrayUpload) {
-    httpMethod = 'post'
-    uri = 'https://bintray.com/api/v1/content/core9/core9/' + project.name + '/' + project.version + '/publish'
-    username = System.env.BINTRAY_USER
-    password = System.env.BINTRAY_KEY
+	httpMethod = 'post'
+	uri = 'https://bintray.com/api/v1/content/core9/core9/' + project.name + '/' + project.version + '/publish'
+	username = System.env.BINTRAY_USER
+	password = System.env.BINTRAY_KEY
 }
 
+
+repositories {
+	flatDir {
+		dirs 'libs'
+	}
+ }
+ 
+compileJava {
+	options.compilerArgs << '-parameters'
+	//options.fork = true
+	//options.forkOptions.executable = 'javac'
+}
+
+
+
 dependencies {
-	
-	
+
+
 	compile 'io.core9:core-api:+'
-
-	// overide some 13 version.
-	compile 'com.google.guava:guava:15.0'
-	
-	
 	compile 'io.core9:module-widgets-api:+'
-	
-	compile 'org.apache.logging.log4j:log4j-api:2.0-rc1'
-	compile 'org.apache.logging.log4j:log4j-core:2.0-rc1'
-	
-	compile 'com.sun.jersey:jersey-client:1.18.1'
-	compile 'com.sun.jersey:jersey-core:1.18.1'
-	
-	compile 'net.minidev:json-smart:2.0-RC3'
-
-	
-	compile 'com.wordnik:swagger-jaxrs_2.10:1.3.5'
-	
-	
 	compile 'io.core9:module-database-mongodb-api:+'
 	compile 'io.core9:module-authentication-api:+'
 	
-	testCompile 'io.core9:core:1.0.27'
+	// this is here only because of the json stuff in RestRequestImpl
+	compile 'io.core9:module-server:+'
+	compile 'io.core9:module-server-vertx:+'
+
+	// overide some google guava 13 version.
+	compile 'com.google.guava:guava:15.0'
+	compile 'org.apache.logging.log4j:log4j-api:2.0-rc1'
+	compile 'org.apache.logging.log4j:log4j-core:2.0-rc1'
+	compile 'com.sun.jersey:jersey-client:1.18.1'
+	compile 'com.sun.jersey:jersey-core:1.18.1'
+	compile 'net.minidev:json-smart:2.0-RC3'
+	compile 'com.wordnik:swagger-jaxrs_2.10:1.3.5'
 
 	
+	
+	
+	compile "io.vertx:vertx-core:2.1"
+	compile "io.vertx:vertx-platform:2.1"
+	
+	compile 'io.vertx:vertx-hazelcast:2.1'
+
+	
+	testCompile 'io.vertx:testtools:2.0.3-final'
+	
+	compile 'com.netflix.rxjava:rxjava-core:0.17.6'
+	compile 'io.vertx:mod-rxvertx:1.0.0-beta3-SNAPSHOT'
+	
+	// start xeger
+	compile 'nl.flotsam:xeger:1.0-SNAPSHOT'
+	compile 'dk.brics.automaton:automaton:1.11-8'
+	// end xeger
+
+	
+	testCompile 'io.core9:core:1.0.27'
+	testCompile 'io.core9:module-template-engine-closure:+'
+	testCompile 'io.core9:module-authentication:+'
+	testCompile 'io.core9:module-authentication-standard:+'
+	testCompile 'io.core9:module-database:+'
+	testCompile 'io.core9:module-database-mongodb:+'
 }

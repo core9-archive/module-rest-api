@@ -1,5 +1,7 @@
 package io.core9.plugin.test;
 
+import io.core9.plugin.rest.PojoMapper;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
@@ -7,18 +9,14 @@ import java.lang.reflect.Method;
 
 import javax.ws.rs.core.Response;
 
-import io.core9.plugin.petstore.api.PetResource;
-import io.core9.plugin.petstore.api.exceptions.NotFoundException;
-import io.core9.plugin.rest.PojoMapper;
-
-import org.junit.Test;
-
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.wordnik.swagger.sample.exception.NotFoundException;
+import com.wordnik.swagger.sample.resource.PetResource;
 
 public class TestPetResource {
 
-	@Test
+	//@Test
 	public void test() throws NotFoundException, JsonMappingException,
 			JsonGenerationException, IOException {
 
@@ -36,7 +34,7 @@ public class TestPetResource {
 
 	}
 
-	@Test
+	//@Test
 	public void printMethodAnnotations() {
 
 		Method[] methods = PetResource.class.getMethods();
@@ -53,7 +51,7 @@ public class TestPetResource {
 
 	}
 
-	@Test
+	//@Test
 	public void invokeMethod() throws IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException,
 			NoSuchMethodException, SecurityException, JsonMappingException,
