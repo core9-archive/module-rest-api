@@ -8,7 +8,6 @@ import io.core9.plugin.rest.RestRequest;
 import io.core9.plugin.rest.RestRequestImpl;
 import io.core9.plugin.rest.RestRouter;
 import io.core9.plugin.rest.RestRouterImpl;
-import io.core9.plugin.server.VirtualHost;
 import io.core9.plugin.server.request.Method;
 
 import java.util.HashMap;
@@ -42,7 +41,7 @@ public class TestRequestConverter {
 	public void createRequest() {
 
 		RestRequest req = new RestRequestImpl();
-		VirtualHost virtualHost = new VirtualHost("localhost");
+		//VirtualHost virtualHost = new VirtualHost("localhost");
 		Map<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("user", "user1");
@@ -51,7 +50,7 @@ public class TestRequestConverter {
 		req.setBasePath(basePath);
 		req.setPath("/test");
 		req.setParams(params);
-		req.setVirtualHost(virtualHost);
+		//req.setVirtualHost(virtualHost);
 
 		JSONObject jsonRequest = req.toJson();
 		

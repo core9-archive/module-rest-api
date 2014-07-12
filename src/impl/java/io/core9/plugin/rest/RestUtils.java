@@ -61,7 +61,7 @@ public class RestUtils {
 	public static RestRequest convertServerRequestToRestRequest(String basePath, Request request) {
 
 		RestRequest req = new RestRequestImpl();
-		req.setBody(request.getBody());
+		req.setBody(request.getBody().toBlocking().last());
 		req.setMethod(request.getMethod());
 		req.setBasePath(basePath);
 		req.setPath(request.getPath());

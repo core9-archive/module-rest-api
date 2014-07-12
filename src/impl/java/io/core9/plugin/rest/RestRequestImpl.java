@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.JSONValue;
 
-import org.vertx.java.core.json.JsonArray;
-import org.vertx.java.core.json.JsonObject;
+
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -83,7 +83,7 @@ public class RestRequestImpl implements RestRequest {
 		if (bodyAsList != null) {
 			return bodyAsList;
 		}
-		return Arrays.asList(new JsonArray(body).toArray());
+		return null;
 	}
 
 	@Override
@@ -92,7 +92,8 @@ public class RestRequestImpl implements RestRequest {
 		if (bodyAsMap != null) {
 			return bodyAsMap;
 		}
-		return new JsonObject(body).toMap();
+		
+		return null;
 	}
 
 	@Override
@@ -242,11 +243,18 @@ public class RestRequestImpl implements RestRequest {
 	public JSONObject toJson() {
 		JSONObject json = new JSONObject();
 
+
+		json.put("pathParts", pathParts);
+		json.put("basePath", basePath);
 		json.put("method", type.name());
 		json.put("path", path);
 		json.put("params", new JSONObject(params));
-		json.put("host", vhost.getHostname());
-
+		if(vhost != null){
+			json.put("host", vhost.getHostname());	
+		}
+		json.put("rxJavaVarName", rxJavaVarName);
+		json.put("rxJavaMethod", rxJavaMethod);
+		
 		return json;
 	}
 
@@ -254,7 +262,9 @@ public class RestRequestImpl implements RestRequest {
 	@Override
 	public void fromJson(JSONObject json) {
 		this.path = (String) json.get("path");
-		this.vhost = new VirtualHost((String) json.get("host"));
+		this.rxJavaVarName = (String) json.get("rxJavaVarName");
+		this.rxJavaMethod = (String) json.get("rxJavaMethod");
+		//this.vhost = new VirtualHost((String) json.get("host"));
 		this.type = methods.get((String) json.get("method"));
 
 		JSONObject tmp = (JSONObject) json.get("params");
@@ -268,7 +278,18 @@ public class RestRequestImpl implements RestRequest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//Object parts = json.get("pathParts");
+		
+		JSONArray parts = (JSONArray)JSONValue.parse(json.get("pathParts").toString());
 
+		String[] arr = new String[parts.size()];
+		for(int i = 0; i < parts.size(); i++){
+		   arr[i] = (String) parts.get(0);
+		}
+		
+		this.pathParts = arr;
+		this.basePath = (String) json.get("basePath");
 		this.params = result;
 
 	}

@@ -1,16 +1,18 @@
 package io.core9.plugin.test;
 
-import java.util.Map;
-
 import io.core9.plugin.rest.RestRequest;
+
+import java.util.List;
+import java.util.Map;
 
 public interface RxJavaRequestCollector {
 
 	RxJavaRequestCollector setRequest(RestRequest request);
 
-	Map<String, RestRequest> getRequests(String rxJavaMethod);
+	List<Map<String, RestRequest>> getRequests(String rxJavaMethod);
 
-	Map<String, Map<String, RestRequest>> getRequests();
+	Map<String, List<Map<String, RestRequest>>> getRequests();
+
 
 
 
