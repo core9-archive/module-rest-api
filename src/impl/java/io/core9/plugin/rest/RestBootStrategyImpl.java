@@ -31,6 +31,7 @@ public class RestBootStrategyImpl extends CoreBootStrategy implements
 			}
 
 		}
+		System.out.print("pause");
 	}
 
 	@Override

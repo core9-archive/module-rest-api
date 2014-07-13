@@ -3,7 +3,6 @@ package com.wordnik.swagger.sample.core9.connector;
 import io.core9.plugin.rest.RestResource;
 import io.core9.plugin.rest.RestResourceConfig;
 import io.core9.plugin.rest.RestResourceConfigImpl;
-import io.core9.plugin.rest.RestResourceProvider;
 import io.core9.plugin.rest.RestUtils;
 
 import java.util.HashMap;
@@ -18,7 +17,7 @@ import com.wordnik.swagger.sample.resource.UserResource;
 
 
 @PluginImplementation
-public class PetstoreRestResourceProviderImpl implements RestResourceProvider {
+public class PetstoreRestResourceProviderImpl implements PetstoreRestResourceProvider {
 
 	private Map<String, RestResource> resourceMap = new HashMap<>();
 	
