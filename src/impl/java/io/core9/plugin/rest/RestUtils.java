@@ -5,8 +5,10 @@ import io.core9.plugin.server.request.Request;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.ws.rs.core.Response;
 
@@ -60,14 +62,24 @@ public class RestUtils {
 
 	public static RestRequest convertServerRequestToRestRequest(String basePath, Request request) {
 
+		Map<String, Object> params = queryParamsToPrarams(request.getQueryParams());
+
 		RestRequest req = new RestRequestImpl();
 		req.setBody(request.getBody().toBlocking().last());
 		req.setMethod(request.getMethod());
 		req.setBasePath(basePath);
 		req.setPath(request.getPath());
-		req.setParams(request.getParams());
+		req.setParams(params);
 		req.setVirtualHost(request.getVirtualHost());
 		return req;
+	}
+
+	private static Map<String, Object> queryParamsToPrarams(Map<String, Deque<String>> queryParams) {
+		Map<String, Object> params = new HashMap<>();
+		for (Entry<String, Deque<String>> param : queryParams.entrySet()) {
+			params.put(param.getKey(), param.getValue());
+		}
+		return params;
 	}
 
 	public static String getApiPath(String apiPath) {
@@ -93,7 +105,8 @@ public class RestUtils {
 
 		MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		//validateAndInitiateMethodBasedOnParameters(resourceObject, request, resourceMap, urlParam);
+		// validateAndInitiateMethodBasedOnParameters(resourceObject, request,
+		// resourceMap, urlParam);
 
 		JSONArray methodParameters = (JSONArray) resourceMap.get("parameters");
 		@SuppressWarnings("rawtypes")
@@ -210,7 +223,5 @@ public class RestUtils {
 
 		return result;
 	}
-
-
 
 }
