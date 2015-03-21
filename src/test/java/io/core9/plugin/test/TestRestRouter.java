@@ -33,6 +33,7 @@ public class TestRestRouter {
 		registry = PluginRegistryImpl.getInstance();
 		restRouter = (RestRouter) registry.getPlugin(RestRouterImpl.class);
 
+
 		assertNotNull(restRouter);
 	}
 
@@ -112,7 +113,7 @@ public class TestRestRouter {
 
 		System.out.println(response);
 	}
-	
+
 	public void restRouterPostPet() {
 
 		RestRequest request = new RestRequestImpl();
